@@ -1,0 +1,171 @@
+* {
+    padding: 0;
+    margin: 0;
+    font-family: 'PT Sans', sans-serif;
+}
+
+@keyframes animate {
+    from {top:-320px; opacity:0}
+    to {top:30%; opacity:1}
+}
+
+dialog {
+    margin: 0 auto;
+    padding: 10px;
+    z-index: 10;
+    position: relative;
+    right: 50%;
+    transition: top .4s ease ;
+    animation-name: animate;
+    animation-duration: 0.5s
+
+}
+
+.bg_dialog {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, .7);
+    display: none;
+}
+
+meter {
+    opacity: 0;
+    margin-top: 10px;
+    width: 100px;
+    transition: opacity .3s ease-in;
+    margin-right: 10px;
+}
+
+
+/*start header*/
+
+header {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.main__title {
+    width: 507px;
+    font-weight: bold;
+    font-size: 48px;
+    line-height: 62px;
+    text-transform: uppercase;
+    margin-top: 224px;
+
+}
+
+.main__subtitle {
+    width: 847px;
+    font-size: 24px;
+    line-height: 31px;
+    text-transform: uppercase;
+    text-align: center;
+    margin: 53px 0;
+    color: #B3B3B3;
+    font-weight: bold;
+}
+
+/* start form*/
+
+.row {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 30px;
+}
+
+.title {
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 28px;
+    line-height: 36px;
+
+}
+
+.radio-wrapper {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.your-data {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.sights {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.sights-img-wrapper {
+    width: 100px;
+    height: 100px;
+    opacity: 0;
+    background-repeat: no-repeat;
+    background-position: center center;
+    -webkit-background-size: cover;
+    background-size: cover;
+    background-image: url("https://st.depositphotos.com/1057584/1413/v/950/depositphotos_14138720-stock-illustration-landmarks-and-cultures-icons.jpg");
+    transition: opacity .2s ease;
+    
+}
+
+.gallery {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.gallery img {
+    width: 200px;
+    height: 200px;
+}
+
+.gallery__img-wrapper  {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.gallery__img-wrapper img {
+    margin: 20px
+}
+
+textarea {
+    width: 80%;
+}
+
+.text-area {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+input[type='submit'] {
+    display: flex;
+    align-self: flex-start;
+    justify-content: center;
+}
+
+.range {
+    opacity: 0;
+    transition: opacity .3s ease-in-out;
+}
+
+
+
+
+
+

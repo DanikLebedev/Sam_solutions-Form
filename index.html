@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://fonts.googleapis.com/css?family=PT+Sans:400,700&display=swap&subset=cyrillic" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <title>Отзыв</title>
+</head>
+<body>
+
+<div class="bg_dialog">
+    <dialog>
+        <h2 class="dialog__title">Спасибо <span class="full-name"></span>, ваш отзыв отправлен</h2>
+        <h4 class="dialog__subtitle">Суммарная информация</h4>
+        <p>Контакты: <span class="contacts"></span></p>
+        <p>Дата: <span class="date_of_travel"></span></p>
+        <p>Страна визита: <span class="visited-country"></span></p>
+        <p>Посещенные достопримечательности: <span class="visited-sights"></span></p>
+        <p>Оценка гида: <span class="guide-mark"></span></p>
+        <p>Эмоции от поездки: <span class="travel-emotions"></span></p>
+        <button class="close-dialog">Закрыть окно</button>
+    </dialog>
+</div>
+  <header>
+      <h1 class="main__title">Оставьте свой отзыв</h1>
+      <h3 class="main__subtitle">Помогите нашим отелям стать лучше! Оставьте отзыв о них,
+          а также о посещенных вами достопримечательностях</h3>
+  </header>
+    <form action="">
+        <div class="row">
+            <div class="emotions">
+                <h4 class="title">Ваше общее впечатление</h4>
+              <div class="radio-wrapper">
+                  <label for="radio__good">
+                      <input type="radio" value="good" name="mark" id="radio__good">Скорее положительное
+                  </label>
+                  <label for="radio__bad">
+                      <input type="radio" value="bad" name="mark" id="radio__bad">Скорее отрицательное
+                  </label>
+                  <label for="radio__no-answer">
+                      <input type="radio" value="no-answer" name="mark" id="radio__no-answer">Затрудняюсь ответить
+                  </label>
+                 <div class="meter-wrapper">
+                     <meter value="0" min="0" max="100" high="100" id="meter"></meter><span class="meter-percent"></span>
+                 </div>
+              </div>
+            </div>
+            <div class="vertical-line"></div>
+            <div class="your-data">
+                <h4 class="title">Представьтесь</h4>
+                <label for="name">Имя: <input type="text" id="name"></label>
+                <label for="surname">Фамилия: <input type="text" id="surname"></label>
+                <label for="father_name">Отчество: <input type="text" id="father_name"></label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="horizontal-line"></div>
+            <h4 class="title">Контактная информация</h4>
+            <div class="horizontal-line"></div>
+        </div>
+        <div class="row">
+            <div class="phone__input">
+                <label for="phone">Телефон:</label>
+                <input type="text" id="phone">
+                <div class="validate__message"></div>
+            </div>
+            <div class="phone__input">
+                <label for="email">Электронная почта:</label>
+                <input type="text" id="email">
+                <div class="validate__message"></div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="horizontal-line"></div>
+            <h4 class="title">Детали поездки</h4>
+            <div class="horizontal-line"></div>
+        </div>
+        <div class="row">
+            <label for="date">Даты поездки<input type="date" id="date"></label>
+            <select name="country" id="country">
+                <option value="Bel" selected>Беларусь</option>
+                <option value="Ita">Италия</option>
+                <option value="Est">Эстония</option>
+            </select>
+            <div class="sights">
+                <label for="first-sight" id="first-sight__label">
+                    <input type="checkbox" id="first-sight" value="Гора лысая">
+                    <span class="first_changed-sight">Гора лысая</span>
+                </label>
+                <label for="second-sight" id="second-sight__label">
+                    <input type="checkbox" id="second-sight" value="Национальная библиотека">
+                    <span class="second_changed-sight">Национальная библиотека</span>
+                </label>
+                <label for="third-sight" id="third-sight__label">
+                    <input type="checkbox" id="third-sight" value="Гродненский зоопарк">
+                    <span class="third_changed-sight">Гродненский зоопарк</span>
+                </label>
+            </div>
+            <div class="sights-img-wrapper"></div>
+
+        </div>
+       <div class="row">
+           <h4 class="title">Оцените Качество услуг гида</h4>
+       </div>
+        <div class="row">
+            <h5 class="lang_title">На родном языке</h5>
+           <div class="lang__input-wrapper">
+               <input type="checkbox" id="your-lang__checkbox">
+               <input type="range" id="your-lang__range" class="range" name="range"
+                      min="0" max="10">
+           </div>
+            <h5 class="lang_title" >На Иностранном языке</h5>
+            <div class="lang__input-wrapper">
+                <input type="checkbox" id="foreign-lang__checkbox" >
+                <input type="range" class="range" id="foreign-lang__range" min="0" max="10" name="range">
+            </div>
+        </div>
+        <div class="row">
+            <div class="horizontal-line"></div>
+            <h4 class="title">Галерея</h4>
+            <div class="horizontal-line"></div>
+        </div>
+        <div class="gallery">
+            <input type="file" value="Загрузить файл" multiple class="file">
+            <div class="gallery__img-wrapper"></div>
+        </div>
+        <div class="row">
+            <div class="horizontal-line"></div>
+            <h4 class="title">Опишите свои эмоции:</h4>
+            <div class="horizontal-line"></div>
+        </div>
+        <div class="row">
+            <textarea name="feedback" id="feedback" cols="30" rows="10"></textarea>
+        </div>
+        <div class="row">
+            <input type="submit" value="Отправить отзыв"  class="send">
+        </div>
+    </form>
+    <script src="script.js"></script>
+</body>
+</html>
