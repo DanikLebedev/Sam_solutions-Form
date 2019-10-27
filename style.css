@@ -4,21 +4,44 @@
     font-family: 'PT Sans', sans-serif;
 }
 
+
+/*dialog styles*/
+
 @keyframes animate {
     from {top:-320px; opacity:0}
-    to {top:30%; opacity:1}
+    to {top:20%; opacity:1}
 }
 
 dialog {
     margin: 0 auto;
-    padding: 10px;
     z-index: 10;
     position: relative;
     right: 50%;
     transition: top .4s ease ;
     animation-name: animate;
-    animation-duration: 0.5s
+    animation-duration: 0.5s;
+    border: none;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    padding: 46px 75px;
+}
 
+dialog .btn {
+    padding: 20px;
+    font-size: 16px;
+}
+
+dialog p {
+    margin: 10px 0;
+
+}
+
+.dialog__title {
+    text-align: center;
+    margin: 20px;
+
+}
+.dialog__subtitle {
+    text-align: center;
 }
 
 .bg_dialog {
@@ -29,7 +52,10 @@ dialog {
     left: 0;
     background-color: rgba(0, 0, 0, .7);
     display: none;
+    overflow:hidden;
 }
+
+/*meter style*/
 
 meter {
     opacity: 0;
@@ -39,6 +65,161 @@ meter {
     margin-right: 10px;
 }
 
+
+/*checkbox*/
+
+.checkbox {
+    cursor: pointer;
+    display: block;
+}
+
+.checkbox input {
+    display: none;
+    margin-bottom: 10px;
+}
+
+.checkbox input + span:before {
+    content:'';
+    font-size: 25px;
+    height: 25px;
+    width: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    float: left;
+    background-color: #E5E5E5;
+    color: #484646;
+    border-radius:5px;
+    margin-right: 20px;
+    transition: all 0.3s ease-in-out;
+
+}
+
+.checkbox input:checked + span:before {
+     content:'\2714';
+     color: #000;
+ }
+
+/*toggle*/
+
+.toggle {
+    cursor: pointer;
+    display: block;
+    margin-right: 20px;
+}
+
+.toggle input {
+   opacity: 0;
+}
+
+.toggle input + span {
+    display: block;
+    position: relative;
+    float: left;
+    width: 80px;
+    height: 40px;
+    margin-right: 20px;
+    background-color: #B1B1B1;
+    border-radius: 40px;
+    transition: all 0.2s ease-in-out;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, .6);
+    z-index: -1;
+}
+
+.toggle input:checked + span {
+     background-color: #62C83E;
+ }
+.toggle input + span:before {
+    content:'';
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 96%;
+    width: 40px;
+    background-color: #fefefe;
+    border-radius: 50px;
+    transition:all 0.2s ease-in-out;
+    box-shadow:inset 5px -5px 10px 5px rgba(0,0,0,.2),
+    0 0 4px 0 rgba(0,0,0,.7);
+    z-index: 1;
+  }
+.toggle input:checked + span:before {
+     left: 40px;
+ }
+
+
+
+/*radioButton style*/
+
+
+input[type="radio"]:checked + label,
+input[type="radio"]:not(:checked) + label {
+    display: inline-block;
+    position: relative;
+    padding-left: 28px;
+    line-height: 20px;
+    cursor: pointer;
+    margin-top: 25px;
+}
+
+input[type="radio"]:checked,
+input[type="radio"]:not(:checked)
+{
+    display: none;
+}
+
+input[type="radio"]:checked + label:before,
+input[type="radio"]:not(:checked) + label:before {
+    border-radius: 100%;
+}
+
+input[type="radio"]:checked + label:before,
+input[type="radio"]:not(:checked) + label:before {
+    content: " ";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 20px;
+    height: 20px;
+    border: 1px solid #E5E5E5;
+    background-color: #E5E5E5;
+
+}
+
+input[type="radio"]:checked + label:after,
+input[type="radio"]:not(:checked) + label:after {
+    left: 6px;
+    top: 6px;
+    width: 10px;
+    height: 10px;
+    border-radius: 100%;
+    background-color: #484646;
+
+
+}
+
+input[name='radio'] {
+    z-index: -1;
+}
+
+input[type="radio"]:checked + label:after,
+input[type="radio"]:not(:checked) + label:after {
+    content: "";
+    position: absolute;
+    -webkit-transition: all 0.2s ease;
+    -moz-transition: all 0.2s ease;
+    -o-transition: all 0.2s ease;
+    transition: all 0.2s ease;
+    z-index: -1;
+}
+
+input[type="radio"]:not(:checked) + label:after {
+    opacity: 0;
+}
+
+input[type="radio"]:checked + label:after {
+    opacity: 1;
+}
 
 /*start header*/
 
@@ -55,7 +236,7 @@ header {
     font-size: 48px;
     line-height: 62px;
     text-transform: uppercase;
-    margin-top: 224px;
+    margin-top: 100px;
 
 }
 
@@ -72,6 +253,13 @@ header {
 
 /* start form*/
 
+.section-title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px;
+}
+
 .row {
     display: flex;
     justify-content: space-around;
@@ -83,6 +271,7 @@ header {
     font-weight: bold;
     font-size: 28px;
     line-height: 36px;
+    white-space: nowrap;
 
 }
 
@@ -90,13 +279,75 @@ header {
     display: flex;
     justify-content: center;
     flex-direction: column;
+    font-size: 24px;
+
+}
+
+.vertical-line {
+    width: 2px;
+    height: 235px;
+    background: #B1B1B1;
+}
+
+.horizontal-line {
+    width: 50%;
+    height: 2px;
+    background: #B1B1B1;
+    margin: 0 30px;
 }
 
 .your-data {
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
+    font-size: 24px;
+    line-height: 31px;
+    text-transform: uppercase;
+}
+
+.your-data label {
+    margin-top: 10px;
+
+}
+
+.input-wrapper {
+    display: flex;
+    align-items: center;
+}
+
+.your-data input,.phone__input input {
+    border: none;
+    outline: none;
+    padding: 5px 20px 0;
+    background: #E5E5E5;
+    font-size: 24px;
+    width: 210px;
+    margin-left: 10px;
+    text-transform: uppercase;
+}
+
+#name {
+    margin-left: 72px;
+}
+
+.phone__input {
+    font-size: 24px;
+    line-height: 31px;
+    text-transform: uppercase;
+}
+
+.date-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-size: 24px;
+}
+ input[type='date'] {
+     font-size: 24px;
+ }
+
+#country {
+    font-size: 24px;
 }
 
 
@@ -104,21 +355,35 @@ header {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
+    font-size: 24px;
 }
 
 .sights-img-wrapper {
     width: 100px;
     height: 100px;
-    opacity: 0;
     background-repeat: no-repeat;
     background-position: center center;
     -webkit-background-size: cover;
     background-size: cover;
-    background-image: url("https://st.depositphotos.com/1057584/1413/v/950/depositphotos_14138720-stock-illustration-landmarks-and-cultures-icons.jpg");
     transition: opacity .2s ease;
-    
+    position: absolute;
+    border-radius: 20px;
 }
+
+.lang_title {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+
+.lang__input-wrapper {
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
 
 .gallery {
     margin-top: 20px;
@@ -145,6 +410,11 @@ header {
 
 textarea {
     width: 80%;
+    background: #E0E0E0;
+    border: none;
+    outline: none;
+    padding: 20px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
 .text-area {
@@ -153,11 +423,6 @@ textarea {
     justify-content: flex-start;
     align-items: center;
 }
-input[type='submit'] {
-    display: flex;
-    align-self: flex-start;
-    justify-content: center;
-}
 
 .range {
     opacity: 0;
@@ -165,6 +430,22 @@ input[type='submit'] {
 }
 
 
+.btn {
+    border: none;
+    padding: 25px 105px;
+    font-size: 28px;
+    color: #ffffff;
+    background: #81B3D2;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+    cursor: pointer;
+    transition: opacity .3s;
+    text-transform: uppercase;
+    outline: none;
+}
+
+.btn:hover {
+    opacity: .7;
+}
 
 
 
