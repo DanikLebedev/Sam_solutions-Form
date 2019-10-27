@@ -12,6 +12,7 @@ function setData() {
     changeSights();
     showRange();
     showSightsImg();
+    followCursor();
     sendForm.addEventListener('click', () => {
         setContacts();
         setDate();
@@ -178,17 +179,19 @@ function setMeter() {
 // start
 
 function showRange() {
-    let yourLangRange = document.querySelector('#your-lang__checkbox + input[type="range"]')
+    let yourLangRange = document.querySelector('#your-lang__range');
     let yourLangCheckbox = document.querySelector('#your-lang__checkbox');
     let foreignLangCheckbox = document.querySelector('#foreign-lang__checkbox');
-    let foreignLangRange = document.querySelector('#foreign-lang__checkbox + input[type="range"]');
+    let foreignLangRange = document.querySelector('#foreign-lang__range');
 
     yourLangCheckbox.addEventListener('change', () => {
-        yourLangCheckbox.checked ? yourLangRange.style.opacity = "1" : yourLangRange.style.opacity = "0"
+        yourLangCheckbox.checked ? yourLangRange.style.opacity = "1" : yourLangRange.style.opacity = "0";
+        yourLangRange.value = 0;
     });
 
     foreignLangCheckbox.addEventListener('change', () => {
-        foreignLangCheckbox.checked ? foreignLangRange.style.opacity = "1" : foreignLangRange.style.opacity = "0"
+        foreignLangCheckbox.checked ? foreignLangRange.style.opacity = "1" : foreignLangRange.style.opacity = "0";
+        foreignLangRange.value = 0;
     })
 }
 
@@ -197,7 +200,7 @@ function showRange() {
 // start
 
 function setGuideMark() {
-    let yourLangRange = document.querySelector('#your-lang__checkbox + input[type="range"]');
+    let yourLangRange = document.querySelector('#your-lang__range');
     let dialogGuideMark = document.querySelector('.guide-mark');
 
     dialogGuideMark.innerText = yourLangRange.value;
@@ -214,7 +217,6 @@ function setEmotions() {
 
 //done
 
-
 //start
 
 function showSightsImg() {
@@ -225,7 +227,8 @@ function showSightsImg() {
     sightsNames.forEach(item => {
         if (item.id === 'first-sight__label') {
             item.addEventListener('mouseover', () => {
-                sightImg.style.opacity = '1';
+
+                sightImg.style.display = 'block';
                 if (sightsNamesInput[0].value === 'Гора лысая') {
                     sightImg.style.backgroundImage = 'url("https://upload.wikimedia.org/wikipedia/commons/c/c8/Dziar%C5%BEynskaja_hara.jpg")'
                 } else if (sightsNamesInput[0].value === 'Колизей') {
@@ -238,7 +241,7 @@ function showSightsImg() {
 
         if (item.id === 'second-sight__label') {
             item.addEventListener('mouseover', () => {
-                sightImg.style.opacity = '1';
+                sightImg.style.display = 'block';
                 if (sightsNamesInput[1].value === 'Национальная библиотека') {
                     sightImg.style.backgroundImage = 'url("https://www.nlb.by/upload/iblock/830/01_nlb.jpg")'
                 } else if (sightsNamesInput[1].value === 'Римский форум') {
@@ -251,7 +254,7 @@ function showSightsImg() {
 
         if (item.id === 'third-sight__label') {
             item.addEventListener('mouseover', () => {
-                sightImg.style.opacity = '1';
+                sightImg.style.display = 'block';
                 if (sightsNamesInput[2].value === 'Гродненский зоопарк') {
                     sightImg.style.backgroundImage = 'url("http://zetgrodno.com/d/206020/d/hrodnazoo.jpg")'
                 } else if (sightsNamesInput[2].value === 'Пизанская башня') {
@@ -263,16 +266,28 @@ function showSightsImg() {
         }
 
         item.addEventListener('mouseout', () => {
-            sightImg.style.opacity = '0';
+            sightImg.style.display = 'none';
         })
     });
-
 }
 
 // Need to fix via forEach
 
 
+function followCursor() {
+    document.addEventListener('mousemove', (e) => {
+        let sightImg = document.querySelector('.sights-img-wrapper');
+        sightImg.style.left = e.pageX + 20 + 'px';
+        sightImg.style.top = e.pageY + 'px';
+
+    });
+}
+
+//done
+
+
 //start
+document.querySelector('.file').addEventListener('change', handleFileSelect, false);
 
 function handleFileSelect(evt) {
     let files = evt.target.files;
@@ -294,12 +309,10 @@ function handleFileSelect(evt) {
                 document.querySelector('.gallery__img-wrapper').insertBefore(span, null);
             };
         })(f);
-        
+
         reader.readAsDataURL(f);
     }
 }
-
-document.querySelector('.file').addEventListener('change', handleFileSelect, false);
 
 
 
