@@ -21,7 +21,7 @@
         <p>Посещенные достопримечательности: <span class="visited-sights"></span></p>
         <p>Оценка гида: <span class="guide-mark"></span></p>
         <p>Эмоции от поездки: <span class="travel-emotions"></span></p>
-        <button class="close-dialog">Закрыть окно</button>
+        <button class="close-dialog btn">Закрыть окно</button>
     </dialog>
 </div>
   <header>
@@ -33,92 +33,104 @@
         <div class="row">
             <div class="emotions">
                 <h4 class="title">Ваше общее впечатление</h4>
-              <div class="radio-wrapper">
-                  <label for="radio__good">
-                      <input type="radio" value="good" name="mark" id="radio__good">Скорее положительное
-                  </label>
-                  <label for="radio__bad">
-                      <input type="radio" value="bad" name="mark" id="radio__bad">Скорее отрицательное
-                  </label>
-                  <label for="radio__no-answer">
-                      <input type="radio" value="no-answer" name="mark" id="radio__no-answer">Затрудняюсь ответить
-                  </label>
-                 <div class="meter-wrapper">
-                     <meter value="0" min="0" max="100" high="100" id="meter"></meter><span class="meter-percent"></span>
-                 </div>
-              </div>
+                <div class="radio-wrapper">
+                    <input type="radio" value="good" name="mark" id="radio__good"><label for="radio__good" class="radio">Скорее положительное</label>
+                    <input type="radio" value="bad" name="mark" id="radio__bad"><label for="radio__bad" class="radio">Скорее отрицательное</label>
+                    <input type="radio" value="no-answer" name="mark" id="radio__no-answer"><label for="radio__no-answer" class="radio">Затрудняюсь ответить</label>
+                    <div class="meter-wrapper">
+                        <meter value="0" min="0" max="100" high="100" id="meter"></meter><span class="meter-percent"></span>
+                    </div>
+                </div>
             </div>
             <div class="vertical-line"></div>
             <div class="your-data">
                 <h4 class="title">Представьтесь</h4>
-                <label for="name">Имя: <input type="text" id="name"></label>
-                <label for="surname">Фамилия: <input type="text" id="surname"></label>
-                <label for="father_name">Отчество: <input type="text" id="father_name"></label>
+                <div class="input-wrapper">
+                    <label for="name">Имя<sup>*</sup>: </label><input type="text" id="name">
+                </div>
+                <div class="input-wrapper">
+                    <label for="surname">Фамилия<sup>*</sup>: </label><input type="text" id="surname">
+                </div>
+                <div class="input-wrapper">
+                    <label for="father_name">Отчество<sup>*</sup>: </label><input type="text" id="father_name">
+                </div>
             </div>
         </div>
-        <div class="row">
+        <div class="section-title">
             <div class="horizontal-line"></div>
             <h4 class="title">Контактная информация</h4>
             <div class="horizontal-line"></div>
         </div>
         <div class="row">
             <div class="phone__input">
-                <label for="phone">Телефон:</label>
-                <input type="text" id="phone">
+                <label for="phone">Телефон<sup>*</sup>:</label>
+                <input type="text" id="phone" placeholder="Введите телефон">
                 <div class="validate__message"></div>
             </div>
             <div class="phone__input">
-                <label for="email">Электронная почта:</label>
-                <input type="text" id="email">
+                <label for="email">Электронная почта<sup>*</sup>:</label>
+                <input type="text" id="email" placeholder="Введите E-mail">
                 <div class="validate__message"></div>
             </div>
         </div>
-        <div class="row">
+        <div class="section-title">
             <div class="horizontal-line"></div>
             <h4 class="title">Детали поездки</h4>
             <div class="horizontal-line"></div>
         </div>
         <div class="row">
-            <label for="date">Даты поездки<input type="date" id="date"></label>
-            <select name="country" id="country">
-                <option value="Bel" selected>Беларусь</option>
-                <option value="Ita">Италия</option>
-                <option value="Est">Эстония</option>
+            <div class="date-wrapper">
+                <label for="date">Даты поездки</label>
+                <input type="date" id="date">
+            </div>
+            <select name="country" id="country" multiple>
+               <optgroup label="Выберите страну">
+                   <option value="Bel" >Беларусь</option>
+                   <option value="Ita">Италия</option>
+                   <option value="Est">Эстония</option>
+               </optgroup>
             </select>
             <div class="sights">
-                <label for="first-sight" id="first-sight__label">
+                <label for="first-sight" id="first-sight__label" class="checkbox">
                     <input type="checkbox" id="first-sight" value="Гора лысая">
                     <span class="first_changed-sight">Гора лысая</span>
+                    <div class="sights-img-wrapper"></div>
                 </label>
-                <label for="second-sight" id="second-sight__label">
+                <label for="second-sight" id="second-sight__label" class="checkbox">
                     <input type="checkbox" id="second-sight" value="Национальная библиотека">
                     <span class="second_changed-sight">Национальная библиотека</span>
                 </label>
-                <label for="third-sight" id="third-sight__label">
+                <label for="third-sight" id="third-sight__label" class="checkbox">
                     <input type="checkbox" id="third-sight" value="Гродненский зоопарк">
                     <span class="third_changed-sight">Гродненский зоопарк</span>
                 </label>
             </div>
-            <div class="sights-img-wrapper"></div>
+
 
         </div>
        <div class="row">
            <h4 class="title">Оцените Качество услуг гида</h4>
        </div>
         <div class="row">
-            <h5 class="lang_title">На родном языке</h5>
            <div class="lang__input-wrapper">
-               <input type="checkbox" id="your-lang__checkbox">
-               <input type="range" id="your-lang__range" class="range" name="range"
+               <label for="your-lang__checkbox" class="toggle">
+                   <h5 class="lang_title">На родном языке</h5>
+                   <input type="checkbox" id="your-lang__checkbox"><span></span>
+               </label>
+               <input type="range" id="your-lang__range" value='0' class="range" name="range"
                       min="0" max="10">
            </div>
-            <h5 class="lang_title" >На Иностранном языке</h5>
-            <div class="lang__input-wrapper">
-                <input type="checkbox" id="foreign-lang__checkbox" >
-                <input type="range" class="range" id="foreign-lang__range" min="0" max="10" name="range">
-            </div>
         </div>
         <div class="row">
+            <div class="lang__input-wrapper">
+                <label for="foreign-lang__checkbox" class="toggle">
+                    <h5 class="lang_title" >На Иностранном языке</h5>
+                    <input type="checkbox" id="foreign-lang__checkbox"><span></span>
+                </label>
+                <input type="range" class="range" id="foreign-lang__range" value='0' min="0" max="10" name="range">
+            </div>
+        </div>
+        <div class="section-title">
             <div class="horizontal-line"></div>
             <h4 class="title">Галерея</h4>
             <div class="horizontal-line"></div>
@@ -127,16 +139,16 @@
             <input type="file" value="Загрузить файл" multiple class="file">
             <div class="gallery__img-wrapper"></div>
         </div>
-        <div class="row">
+        <div class="section-title">
             <div class="horizontal-line"></div>
             <h4 class="title">Опишите свои эмоции:</h4>
             <div class="horizontal-line"></div>
         </div>
         <div class="row">
-            <textarea name="feedback" id="feedback" cols="30" rows="10"></textarea>
+            <textarea name="feedback" id="feedback" cols="20" rows="10"></textarea>
         </div>
         <div class="row">
-            <input type="submit" value="Отправить отзыв"  class="send">
+            <input type="submit" value="Отправить отзыв"  class="send btn">
         </div>
     </form>
     <script src="script.js"></script>
