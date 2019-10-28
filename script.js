@@ -1,5 +1,5 @@
 //modal window
-const sendForm = document.querySelector(".send");
+const sendForm = document.querySelector("form");
 
 
 setData();
@@ -13,7 +13,7 @@ function setData() {
     showRange();
     showSightsImg();
     followCursor();
-    sendForm.addEventListener('click', () => {
+    sendForm.addEventListener('submit', () => {
         setContacts();
         setDate();
         setCountry();
@@ -30,7 +30,7 @@ function showDialog() {
     const closeDialog = document.querySelector('.close-dialog');
     const bgDialog = document.querySelector('.bg_dialog');
 
-    sendForm.addEventListener('click', (e) => {
+    sendForm.addEventListener('submit', (e) => {
         bgDialog.style.display = "block";
         dialog.style.top = "30%";
         dialog.show();
@@ -166,9 +166,7 @@ function setMeter() {
                 meterPercent.innerText = meter.value = 20;
             }
             if (item.value === 'no-answer') {
-                meterPercent.innerText = '';
-                meter.value = 0;
-                meter.style.opacity = '0';
+                meterPercent.innerText =  meter.value = 60;
             }
         })
     })
@@ -227,7 +225,6 @@ function showSightsImg() {
     sightsNames.forEach(item => {
         if (item.id === 'first-sight__label') {
             item.addEventListener('mouseover', () => {
-
                 sightImg.style.display = 'block';
                 if (sightsNamesInput[0].value === 'Гора лысая') {
                     sightImg.style.backgroundImage = 'url("https://upload.wikimedia.org/wikipedia/commons/c/c8/Dziar%C5%BEynskaja_hara.jpg")'

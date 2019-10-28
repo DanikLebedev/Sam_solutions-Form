@@ -198,10 +198,6 @@ input[type="radio"]:not(:checked) + label:after {
 
 }
 
-input[name='radio'] {
-    z-index: -1;
-}
-
 input[type="radio"]:checked + label:after,
 input[type="radio"]:not(:checked) + label:after {
     content: "";
@@ -210,7 +206,6 @@ input[type="radio"]:not(:checked) + label:after {
     -moz-transition: all 0.2s ease;
     -o-transition: all 0.2s ease;
     transition: all 0.2s ease;
-    z-index: -1;
 }
 
 input[type="radio"]:not(:checked) + label:after {
@@ -445,6 +440,22 @@ textarea {
 
 .btn:hover {
     opacity: .7;
+}
+
+.file {
+    display: none;
+}
+
+#upload_file {
+    width: 100px;
+    height: 100px;
+    background: url('http://s1.iconbird.com/ico/2014/1/618/w512h5121390853621hospital512.png') center center / cover;
+    cursor: pointer;
+    transition: .3s ;
+}
+
+#upload_file:hover {
+    transform: scale(1.1);
 }
 
 
