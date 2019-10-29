@@ -10,17 +10,19 @@
     <title>Отзыв</title>
 </head>
 <body>
-
+<div class="modal"></div>
 <div class="bg_dialog">
-    <dialog>
+    <dialog class="information">
         <h2 class="dialog__title">Спасибо <span class="full-name"></span>, ваш отзыв отправлен</h2>
         <h4 class="dialog__subtitle">Суммарная информация</h4>
-        <p>Контакты: <span class="contacts"></span></p>
-        <p>Дата: <span class="date_of_travel"></span></p>
-        <p>Страна визита: <span class="visited-country"></span></p>
-        <p>Посещенные достопримечательности: <span class="visited-sights"></span></p>
-        <p>Оценка гида: <span class="guide-mark"></span></p>
-        <p>Эмоции от поездки: <span class="travel-emotions"></span></p>
+        <ul>
+            <li>Контакты: <span class="contacts"></span></li>
+            <li>Дата: <span class="date_of_travel"></span></li>
+            <li>Страна визита: <span class="visited-country"></span></li>
+            <li>Посещенные достопримечательности: <span class="visited-sights"></span></li>
+            <li>Оценка гида: <span class="guide-mark"></span></li>
+            <li>Эмоции от поездки: <span class="travel-emotions"></span></li>
+        </ul>
         <button class="close-dialog btn">Закрыть окно</button>
     </dialog>
 </div>
@@ -29,12 +31,12 @@
       <h3 class="main__subtitle">Помогите нашим отелям стать лучше! Оставьте отзыв о них,
           а также о посещенных вами достопримечательностях</h3>
   </header>
-    <form action="">
+    <form action="" class="form">
         <div class="row">
             <div class="emotions">
                 <h4 class="title">Ваше общее впечатление</h4>
                 <div class="radio-wrapper">
-                    <input type="radio" value="good" name="mark" id="radio__good"><label for="radio__good" class="radio">Скорее положительное</label>
+                    <input type="radio" value="good" name="mark"  id="radio__good"><label for="radio__good" class="radio">Скорее положительное</label>
                     <input type="radio" value="bad" name="mark" id="radio__bad"><label for="radio__bad" class="radio">Скорее отрицательное</label>
                     <input type="radio" value="no-answer" name="mark" id="radio__no-answer"><label for="radio__no-answer" class="radio">Затрудняюсь ответить</label>
                     <div class="meter-wrapper">
@@ -46,13 +48,13 @@
             <div class="your-data">
                 <h4 class="title">Представьтесь</h4>
                 <div class="input-wrapper">
-                    <label for="name">Имя<sup>*</sup>: </label><input type="text" id="name">
+                    <label for="name">Имя<sup>*</sup>: </label><input type="text" id="name" class="field">
                 </div>
                 <div class="input-wrapper">
-                    <label for="surname">Фамилия<sup>*</sup>: </label><input type="text" id="surname">
+                    <label for="surname">Фамилия<sup>*</sup>: </label><input type="text" id="surname" class="field">
                 </div>
                 <div class="input-wrapper">
-                    <label for="father_name">Отчество<sup>*</sup>: </label><input type="text" id="father_name">
+                    <label for="father_name">Отчество<sup>*</sup>: </label><input type="text" id="father_name" class="field">
                 </div>
             </div>
         </div>
@@ -62,15 +64,13 @@
             <div class="horizontal-line"></div>
         </div>
         <div class="row">
-            <div class="phone__input">
+            <div class="phone__input phone">
                 <label for="phone">Телефон<sup>*</sup>:</label>
-                <input type="text" id="phone" placeholder="Введите телефон">
-                <div class="validate__message"></div>
+                <input type="text" id="phone" placeholder="Введите телефон" class="field">
             </div>
-            <div class="phone__input">
+            <div class="phone__input email">
                 <label for="email">Электронная почта<sup>*</sup>:</label>
-                <input type="text" id="email" placeholder="Введите E-mail">
-                <div class="validate__message"></div>
+                <input type="text" id="email" placeholder="Введите E-mail" class="field">
             </div>
         </div>
         <div class="section-title">
@@ -81,32 +81,13 @@
         <div class="row">
             <div class="date-wrapper">
                 <label for="date">Даты поездки</label>
-                <input type="date" id="date">
+                <input type="date" id="date" class="field">
             </div>
-            <select name="country" id="country" multiple>
-               <optgroup label="Выберите страну">
-                   <option value="Bel" >Беларусь</option>
-                   <option value="Ita">Италия</option>
-                   <option value="Est">Эстония</option>
-               </optgroup>
+            <select name="country" id="select-places-list" class="field">
+                <option value="" selected disabled  >-- Выберите страну --</option>
             </select>
-            <div class="sights">
-                <label for="first-sight" id="first-sight__label" class="checkbox">
-                    <input type="checkbox" id="first-sight" value="Гора лысая">
-                    <span class="first_changed-sight">Гора лысая</span>
-                    <div class="sights-img-wrapper"></div>
-                </label>
-                <label for="second-sight" id="second-sight__label" class="checkbox">
-                    <input type="checkbox" id="second-sight" value="Национальная библиотека">
-                    <span class="second_changed-sight">Национальная библиотека</span>
-                </label>
-                <label for="third-sight" id="third-sight__label" class="checkbox">
-                    <input type="checkbox" id="third-sight" value="Гродненский зоопарк">
-                    <span class="third_changed-sight">Гродненский зоопарк</span>
-                </label>
-            </div>
-
-
+            <ul class="places-list"></ul>
+            <div class="sights-img-wrapper"></div>
         </div>
        <div class="row">
            <h4 class="title">Оцените Качество услуг гида</h4>
@@ -115,17 +96,17 @@
            <div class="lang__input-wrapper">
                <label for="your-lang__checkbox" class="toggle">
                    <h5 class="lang_title">На родном языке</h5>
-                   <input type="checkbox" id="your-lang__checkbox"><span></span>
+                   <input type="checkbox" id="your-lang__checkbox" ><span></span>
                </label>
                <input type="range" id="your-lang__range" value='0' class="range" name="range"
-                      min="0" max="10">
+                      min="0" max="10" >
            </div>
         </div>
         <div class="row">
             <div class="lang__input-wrapper">
                 <label for="foreign-lang__checkbox" class="toggle">
                     <h5 class="lang_title" >На Иностранном языке</h5>
-                    <input type="checkbox" id="foreign-lang__checkbox"><span></span>
+                    <input type="checkbox" id="foreign-lang__checkbox" ><span></span>
                 </label>
                 <input type="range" class="range" id="foreign-lang__range" value='0' min="0" max="10" name="range">
             </div>
@@ -153,6 +134,7 @@
             <input type="submit" value="Отправить отзыв"  class="send btn">
         </div>
     </form>
+    <script src="sights.js"></script>
     <script src="script.js"></script>
 </body>
 </html>

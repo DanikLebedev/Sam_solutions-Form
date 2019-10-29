@@ -4,66 +4,113 @@ const sendForm = document.querySelector("form");
 
 setData();
 
-
-
 function setData() {
     setMeter();
-    showDialog();
-    changeSights();
+    addSightsList();
     showRange();
-    showSightsImg();
-    followCursor();
-    sendForm.addEventListener('submit', () => {
+    setGallery();
+    validateForm();
+    sendForm.addEventListener('submit', (e) => {
         setContacts();
         setDate();
         setCountry();
         setSights();
         setGuideMark();
         setEmotions();
+
     });
 }
 
-//start
+// start
 
-function showDialog() {
-    const dialog = document.querySelector('dialog');
-    const closeDialog = document.querySelector('.close-dialog');
-    const bgDialog = document.querySelector('.bg_dialog');
 
-    sendForm.addEventListener('submit', (e) => {
-        bgDialog.style.display = "block";
-        dialog.style.top = "30%";
-        dialog.show();
-        e.preventDefault()
-    });
+// function showInformation() {
+//     const dialog = document.querySelector('dialog');
+//     dialog.close()
+//     sendForm.addEventListener('submit', (e) => {
+//         e.preventDefault();
+//
+//
+//         const title = document.createElement('h3');
+//         const message = document.createElement('p');
+//         const list = document.createElement('ul');
+//         const closeBtn = document.createElement('button');
+//         const fields = document.querySelectorAll('.field');
+//         const inputName = document.querySelector('#name').value;
+//         const inputSurname = document.querySelector('#surname').value;
+//         const inputFatherName = document.querySelector('#father_name').value;
+//         const inputPhone = document.querySelector('#phone').value;
+//         const inputEmail = document.querySelector('#email').value;
+//         const inputDate = document.querySelector('#date').value;
+//         const optionCountry = document.querySelectorAll('option');
+//         const sightsCheckbox = document.querySelectorAll('.places-list label input');
+//
+//         closeBtn.className = 'btn';
+//         dialog.appendChild(title);
+//         dialog.appendChild(message);
+//         dialog.appendChild(list);
+//         dialog.appendChild(closeBtn);
+//
+//         closeBtn.addEventListener('click', () => {
+//             dialog.close();
+//
+//         });
+//
+//         title.innerText = `Спасибо, ${inputSurname} ${inputName} ${inputFatherName}, ваш отзыв отправлен!`;
+//         message.innerText = 'Суммарная информация';
+//         const contacts = document.createElement('li');
+//
+//         contacts.innerHTML = `Контакты : ${inputPhone} (${inputEmail})`;
+//
+//         const date = document.createElement('li');
+//
+//         date.innerHTML = `Дата : ${inputDate}`;
+//
+//         const country = document.createElement('li');
+//
+//         optionCountry.forEach( name => name.selected ? country.innerHTML = `Страна визита : ${name.innerHTML}`: name)
+//
+//         const sights = document.createElement('li');
+//
+//         sights.innerHTML = `Посещенные достопримечательности : ${inputPhone} (${inputEmail})`;
+//
+//         const guideMark = document.createElement('li');
+//
+//         guideMark.innerHTML = `Оценки гида : ${inputPhone} (${inputEmail})`;
+//
+//         const emotions = document.createElement('li');
+//
+//         emotions.innerHTML = `Эмоции от поездки : ${inputPhone} (${inputEmail})`;
+//
+//         list.appendChild(contacts);
+//         list.appendChild(date);
+//         list.appendChild(country);
+//         list.appendChild(sights);
+//         list.appendChild(guideMark);
+//         list.appendChild(emotions);
+//
+//         dialog.show()
+//
+//     })
+//
+//
+//
+// }
 
-    closeDialog.addEventListener('click', (e) => {
-        bgDialog.style.display = "none";
-        dialog.close();
-        e.preventDefault()
-    });
+// showInformation();
+    
 
-    window.onclick = function(event) {
-        if (event.target === bgDialog) {
-            bgDialog.style.display = "none";
-        }
-    }
-}
-
-//done
-
-//start
 
 function setContacts() {
-    let inputName = document.querySelector('#name').value;
-    let inputSurname = document.querySelector('#surname').value;
-    let inputFatherName = document.querySelector('#father_name').value;
-    let dialogcontacts = document.querySelector('.contacts');
-    let inputPhone = document.querySelector('#phone').value;
-    let inputEmail = document.querySelector('#email').value;
-    let dialogTitle = document.querySelector('.full-name');
+    const inputName = document.querySelector('#name').value;
+    const inputSurname = document.querySelector('#surname').value;
+    const inputFatherName = document.querySelector('#father_name').value;
+    const dialogContacts = document.querySelector('.contacts');
+    const inputPhone = document.querySelector('#phone').value;
+    const inputEmail = document.querySelector('#email').value;
+    const dialogTitle = document.querySelector('.full-name');
 
-    dialogcontacts.innerText = `${inputPhone} (${inputEmail}) `;
+    dialogContacts.innerText = `${inputPhone}  ${inputEmail}`;
     dialogTitle.innerText = `${inputSurname} ${inputName} ${inputFatherName}`
 
 }
@@ -74,7 +121,7 @@ function setContacts() {
 
 function setDate() {
     const dialogDate = document.querySelector('.date_of_travel');
-    const inputDate = document.querySelector('#date')
+    const inputDate = document.querySelector('#date');
 
    dialogDate.innerText = inputDate.value;
 }
@@ -84,8 +131,8 @@ function setDate() {
 // start
 
 function setCountry() {
-    let optionCountry = document.querySelectorAll('option');
-    let dialogVisitedCountry = document.querySelector('.visited-country');
+    const optionCountry = document.querySelectorAll('option');
+    const dialogVisitedCountry = document.querySelector('.visited-country');
 
    optionCountry.forEach((item) => {
         return item.selected ? dialogVisitedCountry.innerText = item.innerHTML : item;
@@ -98,8 +145,8 @@ function setCountry() {
 // start
 
 function setSights() {
-    let dialogVisitedSights = document.querySelector('.visited-sights');
-    let sightsCheckbox = document.querySelectorAll('.sights input[type="checkbox"]');
+    const dialogVisitedSights = document.querySelector('.visited-sights');
+    const sightsCheckbox = document.querySelectorAll('.places-list label input');
     sightsCheckbox.forEach((item) => {
         item.checked ? dialogVisitedSights.innerText += ` ${item.value} ` : item
     })
@@ -107,54 +154,12 @@ function setSights() {
 
 //done
 
-// start
-
-function changeSights() {
-    let selectCountry = document.querySelector('#country');
-    let firstChangedSight = document.querySelector('.first_changed-sight');
-    let secondChangedSight = document.querySelector('.second_changed-sight');
-    let thirdChangedSight = document.querySelector('.third_changed-sight');
-    let sightsCheckbox = document.querySelectorAll('.sights input[type="checkbox"]');
-
-    selectCountry.addEventListener('change', () => {
-        if (selectCountry.value === 'Ita') {
-            firstChangedSight.innerText = "Колизей";
-            sightsCheckbox[0].value = "Колизей";
-            secondChangedSight.innerText = "Римский форум";
-            sightsCheckbox[1].value = "Римский форум";
-            thirdChangedSight.innerText = "Пизанская башня";
-            sightsCheckbox[2].value = "Пизанская башня";
-        }
-
-        if (selectCountry.value === 'Est') {
-            firstChangedSight.innerText = "Таллинская ратуша";
-            sightsCheckbox[0].value = "Таллинская ратуша";
-            secondChangedSight.innerText = "Лахемаа";
-            sightsCheckbox[1].value = "Лахемаа";
-            thirdChangedSight.innerText = "Замок Тоомпеа";
-            sightsCheckbox[2].value = "Замок Тоомпеа";
-        }
-
-        if (selectCountry.value === 'Bel') {
-            firstChangedSight.innerText = "Гора лысая";
-            sightsCheckbox[0].value = "Гора лысая";
-            secondChangedSight.innerText = "Национальная библиотека";
-            sightsCheckbox[1].value = "Национальная библиотека";
-            thirdChangedSight.innerText = "Гродненский зоопарк";
-            sightsCheckbox[2].value = "Гродненский зоопарк";
-        }
-
-    });
-}
-
-// Need to fix via forEach
-
-// start
+// show meter and set it's value
 
 function setMeter() {
-    let radio = document.querySelectorAll('.radio-wrapper input[type="radio"]');
-    let meter = document.querySelector('#meter');
-    let meterPercent = document.querySelector('.meter-percent')
+    const radio = document.querySelectorAll('.radio-wrapper input[type="radio"]');
+    const meter = document.querySelector('#meter');
+    const meterPercent = document.querySelector('.meter-percent')
 
     radio.forEach(item => {
         item.addEventListener('change', () => {
@@ -174,13 +179,13 @@ function setMeter() {
 
 //done
 
-// start
+// show input range
 
 function showRange() {
-    let yourLangRange = document.querySelector('#your-lang__range');
-    let yourLangCheckbox = document.querySelector('#your-lang__checkbox');
-    let foreignLangCheckbox = document.querySelector('#foreign-lang__checkbox');
-    let foreignLangRange = document.querySelector('#foreign-lang__range');
+    const yourLangRange = document.querySelector('#your-lang__range');
+    const yourLangCheckbox = document.querySelector('#your-lang__checkbox');
+    const foreignLangCheckbox = document.querySelector('#foreign-lang__checkbox');
+    const foreignLangRange = document.querySelector('#foreign-lang__range');
 
     yourLangCheckbox.addEventListener('change', () => {
         yourLangCheckbox.checked ? yourLangRange.style.opacity = "1" : yourLangRange.style.opacity = "0";
@@ -206,6 +211,8 @@ function setGuideMark() {
 
 //done
 
+
+
 function setEmotions() {
     let dialogEmotions = document.querySelector('.travel-emotions');
     let textEmotions = document.querySelector('#feedback');
@@ -217,74 +224,10 @@ function setEmotions() {
 
 //start
 
-function showSightsImg() {
-    let sightsNames = document.querySelectorAll('.sights label');
-    let sightsNamesInput = document.querySelectorAll('.sights label input');
-    let sightImg = document.querySelector('.sights-img-wrapper');
 
-    sightsNames.forEach(item => {
-        if (item.id === 'first-sight__label') {
-            item.addEventListener('mouseover', () => {
-                sightImg.style.display = 'block';
-                if (sightsNamesInput[0].value === 'Гора лысая') {
-                    sightImg.style.backgroundImage = 'url("https://upload.wikimedia.org/wikipedia/commons/c/c8/Dziar%C5%BEynskaja_hara.jpg")'
-                } else if (sightsNamesInput[0].value === 'Колизей') {
-                    sightImg.style.backgroundImage = 'url("https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Colosseum_in_Rome%2C_Italy_-_April_2007.jpg/300px-Colosseum_in_Rome%2C_Italy_-_April_2007.jpg")'
-                } else if (sightsNamesInput[0].value === "Таллинская ратуша") {
-                    sightImg.style.backgroundImage = 'url("https://static1.visitestonia.com/images/12667/raekoda3_.jpeg")'
-                }
-            });
-        }
-
-        if (item.id === 'second-sight__label') {
-            item.addEventListener('mouseover', () => {
-                sightImg.style.display = 'block';
-                if (sightsNamesInput[1].value === 'Национальная библиотека') {
-                    sightImg.style.backgroundImage = 'url("https://www.nlb.by/upload/iblock/830/01_nlb.jpg")'
-                } else if (sightsNamesInput[1].value === 'Римский форум') {
-                    sightImg.style.backgroundImage = 'url("https://upload.wikimedia.org/wikipedia/commons/5/5a/Forum_Romanum_Rom.jpg")'
-                } else if (sightsNamesInput[1].value === "Лахемаа") {
-                    sightImg.style.backgroundImage = 'url("https://www.votpusk.ru/country/ctimages/new/EE13.jpg")'
-                }
-            });
-        }
-
-        if (item.id === 'third-sight__label') {
-            item.addEventListener('mouseover', () => {
-                sightImg.style.display = 'block';
-                if (sightsNamesInput[2].value === 'Гродненский зоопарк') {
-                    sightImg.style.backgroundImage = 'url("http://zetgrodno.com/d/206020/d/hrodnazoo.jpg")'
-                } else if (sightsNamesInput[2].value === 'Пизанская башня') {
-                    sightImg.style.backgroundImage = 'url("https://s15.stc.all.kpcdn.net/share/i/12/10466364/inx960x640.jpg")'
-                } else if (sightsNamesInput[2].value === "Замок Тоомпеа") {
-                    sightImg.style.backgroundImage = 'url("http://estoniia.ru/wp-content/uploads/2016/07/toompea-05.jpg")'
-                }
-            });
-        }
-
-        item.addEventListener('mouseout', () => {
-            sightImg.style.display = 'none';
-        })
-    });
+function setGallery() {
+    document.querySelector('.file').addEventListener('change', handleFileSelect, false);
 }
-
-// Need to fix via forEach
-
-
-function followCursor() {
-    document.addEventListener('mousemove', (e) => {
-        let sightImg = document.querySelector('.sights-img-wrapper');
-        sightImg.style.left = e.pageX + 20 + 'px';
-        sightImg.style.top = e.pageY + 'px';
-
-    });
-}
-
-//done
-
-
-//start
-document.querySelector('.file').addEventListener('change', handleFileSelect, false);
 
 function handleFileSelect(evt) {
     let files = evt.target.files;
@@ -311,12 +254,121 @@ function handleFileSelect(evt) {
     }
 }
 
+//done
+
+// add list with sights
+
+function addSightsList() {
+    const select = document.querySelector('#select-places-list');
+    const places = document.querySelector('.places-list');
+    select.addEventListener('change', (event) => {
+        places.innerHTML='';
+       countryList.places[event.target.selectedIndex - 1].sights.forEach(item => {
+            const sightItem = document.createElement('li');
+            const sightCheckbox = document.createElement('input');
+            const sightName = document.createElement('span');
+            const labelCheckbox = document.createElement('label');
+            sightName.innerText = item.name;
+            sightCheckbox.setAttribute('type', 'checkbox');
+            labelCheckbox.setAttribute('class', 'checkbox');
+            sightCheckbox.setAttribute('value', item.name);
+            sightCheckbox.setAttribute('id', item.name);
+            labelCheckbox.setAttribute('for', item.name);
+            sightCheckbox.parentElement = item;
+            labelCheckbox.appendChild(sightCheckbox);
+            labelCheckbox.appendChild(sightName);
+            sightItem.appendChild(labelCheckbox);
+            places.appendChild(sightItem);
+
+           let sightImg = document.querySelector('.sights-img-wrapper');
+           sightItem.addEventListener('mouseover', () => {
+               sightImg.style.display = 'block';
+               sightImg.style.background = `url(${item.photo}) center center / cover`;
+               sightImg.style.position = 'absolute'
+
+           });
+
+           sightItem.addEventListener('mouseout', () => {
+                sightImg.style.display = 'none';
+           })
+       })
+    });
+    createOption();
+    followCursor();
+}
+
+//done
 
 
 
+function followCursor() {
+    document.addEventListener('mousemove', (e) => {
+        let sightImg = document.querySelector('.sights-img-wrapper');
+        sightImg.style.left = e.pageX + 20 + 'px';
+        sightImg.style.top = e.pageY + 'px';
+    });
+
+}
+
+// add option in select with country name
+
+function createOption() {
+    const select = document.querySelector('#select-places-list');
+    countryList.places.forEach(place => {
+        const sightOpt = document.createElement('option');
+        sightOpt.innerText = place.country;
+        select.add(sightOpt);
+    });
+}
 
 
+function validateForm() {
+    const form = document.querySelector('.form');
+    const fields = document.querySelectorAll('.field');
 
+    form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const fields = document.querySelectorAll('.field');
+        const dialog = document.querySelector('.information');
+        const closeDialog = document.querySelector('.close-dialog');
+        const bgDialog = document.querySelector('.bg_dialog');
+        const dialogTitle = document.querySelector('.dialog__title');
+        const dialogSubtitle = document.querySelector('.dialog__subtitle');
+        const dialogMsg = document.querySelector("dialog ul");
+        const errors = form.querySelectorAll('.error');
+
+        closeDialog.addEventListener('click', () => {
+            bgDialog.style.display = "none";
+            dialog.close();
+        });
+
+        window.onclick = function(event) {
+            if (event.target === bgDialog) {
+                bgDialog.style.display = "none";
+
+            }
+        }
+
+        errors.forEach(item => item.remove());
+
+        fields.forEach(item => {
+            if (!item.value) {
+                let error = document.createElement('span');
+                error.className = 'error';
+                error.style.color = 'red';
+                error.style.fontSize = '12px';
+                error.innerHTML = 'Поле не заполнено';
+                item.parentElement.insertBefore(error, item);
+
+            } else {
+                bgDialog.style.display = "block";
+                dialog.style.top = "30%";
+                dialog.show();
+
+            }
+        });
+    })
+}
 
 
 
