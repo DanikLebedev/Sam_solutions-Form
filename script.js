@@ -22,85 +22,6 @@ function setData() {
 }
 
 // start
-
-
-// function showInformation() {
-//     const dialog = document.querySelector('dialog');
-//     dialog.close()
-//     sendForm.addEventListener('submit', (e) => {
-//         e.preventDefault();
-//
-//
-//         const title = document.createElement('h3');
-//         const message = document.createElement('p');
-//         const list = document.createElement('ul');
-//         const closeBtn = document.createElement('button');
-//         const fields = document.querySelectorAll('.field');
-//         const inputName = document.querySelector('#name').value;
-//         const inputSurname = document.querySelector('#surname').value;
-//         const inputFatherName = document.querySelector('#father_name').value;
-//         const inputPhone = document.querySelector('#phone').value;
-//         const inputEmail = document.querySelector('#email').value;
-//         const inputDate = document.querySelector('#date').value;
-//         const optionCountry = document.querySelectorAll('option');
-//         const sightsCheckbox = document.querySelectorAll('.places-list label input');
-//
-//         closeBtn.className = 'btn';
-//         dialog.appendChild(title);
-//         dialog.appendChild(message);
-//         dialog.appendChild(list);
-//         dialog.appendChild(closeBtn);
-//
-//         closeBtn.addEventListener('click', () => {
-//             dialog.close();
-//
-//         });
-//
-//         title.innerText = `Спасибо, ${inputSurname} ${inputName} ${inputFatherName}, ваш отзыв отправлен!`;
-//         message.innerText = 'Суммарная информация';
-//         const contacts = document.createElement('li');
-//
-//         contacts.innerHTML = `Контакты : ${inputPhone} (${inputEmail})`;
-//
-//         const date = document.createElement('li');
-//
-//         date.innerHTML = `Дата : ${inputDate}`;
-//
-//         const country = document.createElement('li');
-//
-//         optionCountry.forEach( name => name.selected ? country.innerHTML = `Страна визита : ${name.innerHTML}`: name)
-//
-//         const sights = document.createElement('li');
-//
-//         sights.innerHTML = `Посещенные достопримечательности : ${inputPhone} (${inputEmail})`;
-//
-//         const guideMark = document.createElement('li');
-//
-//         guideMark.innerHTML = `Оценки гида : ${inputPhone} (${inputEmail})`;
-//
-//         const emotions = document.createElement('li');
-//
-//         emotions.innerHTML = `Эмоции от поездки : ${inputPhone} (${inputEmail})`;
-//
-//         list.appendChild(contacts);
-//         list.appendChild(date);
-//         list.appendChild(country);
-//         list.appendChild(sights);
-//         list.appendChild(guideMark);
-//         list.appendChild(emotions);
-//
-//         dialog.show()
-//
-//     })
-//
-//
-//
-// }
-
-// showInformation();
-    
-
-
 function setContacts() {
     const inputName = document.querySelector('#name').value;
     const inputSurname = document.querySelector('#surname').value;
@@ -324,18 +245,14 @@ function createOption() {
 
 function validateForm() {
     const form = document.querySelector('.form');
-    const fields = document.querySelectorAll('.field');
-
     form.addEventListener('submit', (e) => {
         e.preventDefault();
         const fields = document.querySelectorAll('.field');
         const dialog = document.querySelector('.information');
         const closeDialog = document.querySelector('.close-dialog');
         const bgDialog = document.querySelector('.bg_dialog');
-        const dialogTitle = document.querySelector('.dialog__title');
-        const dialogSubtitle = document.querySelector('.dialog__subtitle');
-        const dialogMsg = document.querySelector("dialog ul");
         const errors = form.querySelectorAll('.error');
+        const modalError = document.querySelector('.error');
 
         closeDialog.addEventListener('click', () => {
             bgDialog.style.display = "none";
@@ -348,8 +265,23 @@ function validateForm() {
 
             }
         }
-
         errors.forEach(item => item.remove());
+
+        const errorTitle = document.createElement('h3');
+        errorTitle.innerHTML = 'Ошибка';
+        const errorMsg = document.createElement('p');
+        errorMsg.innerHTML  = 'При заполнении произошла ошибка';
+        const errorBtn = document.createElement('button');
+        errorBtn.className = 'btn';
+        errorBtn.addEventListener('click', () => {
+            modalError.style.display = 'none';
+        });
+        errorBtn.innerHTML = 'ОК';
+        modalError.appendChild(errorTitle);
+        modalError.appendChild(errorMsg);
+        modalError.appendChild(errorBtn);
+        modalError.className = 'modal-error';
+
 
         fields.forEach(item => {
             if (!item.value) {
@@ -359,7 +291,7 @@ function validateForm() {
                 error.style.fontSize = '12px';
                 error.innerHTML = 'Поле не заполнено';
                 item.parentElement.insertBefore(error, item);
-
+                modalError.style.display = 'block';
             } else {
                 bgDialog.style.display = "block";
                 dialog.style.top = "30%";

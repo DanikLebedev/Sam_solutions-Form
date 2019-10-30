@@ -465,8 +465,8 @@ textarea {
     font-size: 24px;
     text-align: center;
     position: fixed;
-    top: 10px;
-    right: 10px;
+    top: 30%;
+    right: 30%;
     border: 2px solid #B3B3B3;
     display: none;
     transition: .3s;
