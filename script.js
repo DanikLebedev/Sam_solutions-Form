@@ -1,6 +1,4 @@
 //modal window
-const sendForm = document.querySelector("form");
-
 
 setData();
 
@@ -8,18 +6,27 @@ function setData() {
     setMeter();
     addSightsList();
     showRange();
-    setGallery();
+    loadImage();
+    dragAndDrop();
     validateForm();
-    sendForm.addEventListener('submit', (e) => {
-        setContacts();
-        setDate();
-        setCountry();
-        setSights();
-        setGuideMark();
-        setEmotions();
-
-    });
 }
+
+// const input = document.querySelector('.email');
+// const inputEmail = document.querySelector('#email').value;
+// const warningMsg = document.createElement('span');
+// warningMsg.style.fontSize = '12px';
+// warningMsg.style.color = 'red';
+// warningMsg.innerHTML = 'Error';
+// const filter = /^.+@.+\..+$/;
+// if (!filter.test(inputEmail)) {
+//     input.appendChild(warningMsg);
+//     console.log(222)
+//     if (filter.test(inputEmail)) {
+//         warningMsg.remove();
+//     }
+// }
+
+
 
 // start
 function setContacts() {
@@ -30,6 +37,8 @@ function setContacts() {
     const inputPhone = document.querySelector('#phone').value;
     const inputEmail = document.querySelector('#email').value;
     const dialogTitle = document.querySelector('.full-name');
+    const input = document.querySelector('.email');
+
 
     dialogContacts.innerText = `${inputPhone}  ${inputEmail}`;
     dialogTitle.innerText = `${inputSurname} ${inputName} ${inputFatherName}`
@@ -107,28 +116,48 @@ function showRange() {
     const yourLangCheckbox = document.querySelector('#your-lang__checkbox');
     const foreignLangCheckbox = document.querySelector('#foreign-lang__checkbox');
     const foreignLangRange = document.querySelector('#foreign-lang__range');
+    let rangeValue = document.querySelector('.range-value');
+    let dialogGuideMark = document.querySelector('.guide-mark');
+    dialogGuideMark.innerText = yourLangRange.value;
+
 
     yourLangCheckbox.addEventListener('change', () => {
-        yourLangCheckbox.checked ? yourLangRange.style.opacity = "1" : yourLangRange.style.opacity = "0";
-        yourLangRange.value = 0;
+       if( yourLangCheckbox.checked){
+           yourLangRange.style.opacity = "1"
+           rangeValue.style.display = 'block';
+           yourLangRange.addEventListener('input', () => {
+               rangeValue.innerHTML = yourLangRange.value;
+           })
+           yourLangRange.style.webkitAppearance = 'none';
+
+        } else {
+           yourLangRange.style.opacity = "0";
+           yourLangRange.value = 0;
+           rangeValue.style.display = 'none';
+           rangeValue.innerHTML = '';
+
+
+       }
+
+
+
     });
 
     foreignLangCheckbox.addEventListener('change', () => {
         foreignLangCheckbox.checked ? foreignLangRange.innerHTML = 'Пользовались' : foreignLangRange.innerHTML = 'Не пользовались';
         foreignLangRange.value = 0;
     })
+
 }
 
 //done
 
+
 // start
 
-function setGuideMark() {
-    let yourLangRange = document.querySelector('#your-lang__range');
-    let dialogGuideMark = document.querySelector('.guide-mark');
 
-    dialogGuideMark.innerText = yourLangRange.value;
-}
+
+
 
 //done
 
@@ -143,45 +172,18 @@ function setEmotions() {
 
 //done
 
-//start
-
-
-function setGallery() {
-    document.querySelector('.file').addEventListener('change', handleFileSelect, false);
-}
-
-function handleFileSelect(evt) {
-    let files = evt.target.files;
-
-    for (let i = 0, f; f = files[i]; i++) {
-
-        if (!f.type.match('image.*')) {
-            continue;
-        }
-
-        let reader = new FileReader();
-
-        reader.onload = (function(theFile) {
-            return function(e) {
-                // Render thumbnail.
-                let span = document.createElement('span');
-                span.innerHTML = ['<img src="', e.target.result,
-                    '" title="', escape(theFile.name), '"/>'].join('');
-                document.querySelector('.gallery__img-wrapper').insertBefore(span, null);
-            };
-        })(f);
-
-        reader.readAsDataURL(f);
-    }
-}
-
-//done
-
 // add list with sights
 
 function addSightsList() {
     const select = document.querySelector('#select-places-list');
     const places = document.querySelector('.places-list');
+    let sightImg = document.querySelector('.sights-img-wrapper');
+    let img = document.createElement('img');
+    img.style.width = '100px';
+    img.style.height = '100px';
+    img.style.display = 'none';
+    img.src = 'https://cdn1.iconfinder.com/data/icons/loading-icon/100/loading_icon-03-512.png';
+    sightImg.appendChild(img);
     select.addEventListener('change', (event) => {
         places.innerHTML='';
        countryList.places[event.target.selectedIndex - 1].sights.forEach(item => {
@@ -200,11 +202,10 @@ function addSightsList() {
             labelCheckbox.appendChild(sightName);
             sightItem.appendChild(labelCheckbox);
             places.appendChild(sightItem);
-
-           let sightImg = document.querySelector('.sights-img-wrapper');
            sightItem.addEventListener('mouseover', () => {
                sightImg.style.display = 'block';
-               sightImg.style.background = `url(${item.photo}) center center / cover`;
+               img.style.display = 'block';
+               img.src = item.photo;
                sightImg.style.position = 'absolute'
 
            });
@@ -247,6 +248,11 @@ function validateForm() {
     const form = document.querySelector('.form');
     form.addEventListener('submit', (e) => {
         e.preventDefault();
+        setContacts();
+        setDate();
+        setCountry();
+        setSights();
+        setEmotions();
         const fields = document.querySelectorAll('.field');
         const dialog = document.querySelector('.information');
         const closeDialog = document.querySelector('.close-dialog');
@@ -264,7 +270,7 @@ function validateForm() {
                 bgDialog.style.display = "none";
 
             }
-        }
+        };
         errors.forEach(item => item.remove());
 
         const errorTitle = document.createElement('h3');
@@ -276,29 +282,33 @@ function validateForm() {
         errorBtn.addEventListener('click', () => {
             modalError.style.display = 'none';
         });
+
         errorBtn.innerHTML = 'ОК';
         modalError.appendChild(errorTitle);
         modalError.appendChild(errorMsg);
         modalError.appendChild(errorBtn);
         modalError.className = 'modal-error';
-
+        const arr = [...fields];
+        if (arr.every( item => item.value)) {
+            bgDialog.style.display = "block";
+            dialog.style.top = "30%";
+            dialog.show();
+        } else {
+            modalError.style.display = 'block';
+        }
 
         fields.forEach(item => {
-            if (!item.value) {
                 let error = document.createElement('span');
                 error.className = 'error';
                 error.style.color = 'red';
                 error.style.fontSize = '12px';
                 error.innerHTML = 'Поле не заполнено';
                 item.parentElement.insertBefore(error, item);
-                modalError.style.display = 'block';
-            } else {
-                bgDialog.style.display = "block";
-                dialog.style.top = "30%";
-                dialog.show();
-
-            }
+                if (item.value) {
+                    error.remove()
+                }
         });
+
     })
 }
 
@@ -306,8 +316,71 @@ function validateForm() {
 
 
 
+function dragAndDrop() {
+    let dropArea = document.querySelector(".gallery")
+
+    ;['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+        dropArea.addEventListener(eventName, preventDefaults, false)
+        document.body.addEventListener(eventName, preventDefaults, false)
+    })
+
+    ;['dragenter', 'dragover'].forEach(eventName => {
+        dropArea.addEventListener(eventName, highlight, false)
+    })
+
+    ;['dragleave', 'drop'].forEach(eventName => {
+        dropArea.addEventListener(eventName, unhighlight, false)
+    });
+
+    dropArea.addEventListener('drop', handleDrop, false)
+
+    function preventDefaults (e) {
+        e.preventDefault();
+        e.stopPropagation();
+    }
+
+    function highlight(e) {
+        dropArea.classList.add('highlight')
+    }
+
+    function unhighlight(e) {
+        dropArea.classList.remove('highlight')
+    }
+
+    function handleDrop(e) {
+        const  dt = e.dataTransfer;
+        const files = dt.files;
+
+        handleFiles(files)
+    }
+
+    function handleFiles(files) {
+        files = [...files]
+        files.forEach(previewFile)
+    }
 
 
+}
+
+function loadImage() {
+    document.querySelector('input[type="file"]').addEventListener('change', (e) => {
+        [...e.target.files].forEach(file => {
+            previewFile(file);
+        })
+    });
+
+}
+
+
+function previewFile(file) {
+    let reader = new FileReader()
+    reader.readAsDataURL(file)
+    reader.onloadend = function() {
+        let img = document.createElement('img')
+        img.src = reader.result;
+        document.querySelector('.gallery__img-wrapper').appendChild(img)
+    }
+}
 
 
 
