@@ -114,7 +114,7 @@ function showRange() {
     });
 
     foreignLangCheckbox.addEventListener('change', () => {
-        foreignLangCheckbox.checked ? foreignLangRange.style.opacity = "1" : foreignLangRange.style.opacity = "0";
+        foreignLangCheckbox.checked ? foreignLangRange.innerHTML = 'Пользовались' : foreignLangRange.innerHTML = 'Не пользовались';
         foreignLangRange.value = 0;
     })
 }

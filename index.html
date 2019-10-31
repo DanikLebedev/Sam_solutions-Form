@@ -66,11 +66,11 @@
         <div class="row">
             <div class="phone__input phone">
                 <label for="phone">Телефон<sup>*</sup>:</label>
-                <input type="text" id="phone" placeholder="Введите телефон" class="field">
+                <input type="text" id="phone" placeholder="+375-ХХ-ХХХ-ХХ-ХХ" class="field" pattern="([\+]375(25|29|33|34)([0-9]{3}([0-9]{2}){2}))">
             </div>
             <div class="phone__input email">
                 <label for="email">Электронная почта<sup>*</sup>:</label>
-                <input type="text" id="email" placeholder="Введите E-mail" class="field">
+                <input type="text" id="email" placeholder="example@mail.ru" class="field" pattern="^.+@.+\..+$">
             </div>
         </div>
         <div class="section-title">
@@ -98,8 +98,9 @@
                    <h5 class="lang_title">На родном языке</h5>
                    <input type="checkbox" id="your-lang__checkbox" ><span></span>
                </label>
-               <input type="range" id="your-lang__range" value='0' class="range" name="range"
-                      min="0" max="10" >
+               <input type="range" id="your-lang__range"  class="range" name="range"
+                      min="0" max="100" value="0">
+               <output class="range-value"></output>
            </div>
         </div>
         <div class="row">
@@ -108,7 +109,7 @@
                     <h5 class="lang_title" >На Иностранном языке</h5>
                     <input type="checkbox" id="foreign-lang__checkbox" ><span></span>
                 </label>
-                <input type="range" class="range" id="foreign-lang__range" value='0' min="0" max="10" name="range">
+                <span id="foreign-lang__range">Не пользовались</span>
             </div>
         </div>
         <div class="section-title">
@@ -118,7 +119,7 @@
         </div>
         <div class="gallery">
             <label for="file" id="upload_file">
-                <input type="file" value="Загрузить файл" multiple class="file" id="file">
+                <input type="file" value="Загрузить файл" multiple class="file" id="file" >
             </label>
             <div class="gallery__img-wrapper"></div>
         </div>
